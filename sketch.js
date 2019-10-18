@@ -1,39 +1,31 @@
 let randomIndex;
 let favoriteThing = ["book", "movie", "animal", "color", "game", "superHero"];
-let animating = true;
+let animating = false;
 let num = 0;
 let beginning = true;
+let sizze = 50;
 
 function setup() {
   createCanvas(400, 400);
-  background(200);
-  textSize(32);
-  text("Click to randomize", 50, 50);
+  createCanvas(windowWidth, windowHeight);
+  textSize(100);
+  textFont('Georgia');
+  textAlign(CENTER, CENTER);
+  text("Click to randomize", windowWidth/2, windowHeight/2);
 }
 
 function draw() {
-  if(animating == true){
-    fill(random(0, 255), random(0, 255), random(0, 255));
-    //stroke(random(0, 255), random(0, 255), random(0, 255));
-    //ellipse(random(width), random(height), random(50, 200));
-    //rect(random(width), random(height), random(50, 200), random(50, 200));
-    if(num != 400){
-      rect(0, 0, 400-num, 400-num);
-      //rect(200, 200, 400-num, 400-num);
-      //rect(0, 200, 400-num, 400-num);
-      //rect(200, 0, 400-num, 400-num);
-      num=num+10;
+    if (animating == true) {
+      fill(random(200), random(0), random(20), 75)
+      ellipse(random(width), random(height), sizze,)
+      sizze = sizze+5;
+    } else {
+      sizze = 0;
     }
-    if(num == 400 && beginning){
-      push();
-      fill(0);
-      stroke(255);
-      strokeWeight(5);
-      text("Click to randomize", 50, 50);
-      pop();
+
     }
-  }
-}
+
+
 
 function randomizer(){
   animating = false;
@@ -41,24 +33,25 @@ function randomizer(){
   num = 0;
 
   if(roster[0]){
-  textSize(32);
+  textSize(100);
   //background(random(200, 255));
   background(random(0, 255), random(0, 255), random(0, 255));
   randomIndex = int(random(roster.length));
   let thisThing = random(favoriteThing);
-  text(roster[randomIndex].firstName + " " + roster[randomIndex].lastName, 50, 50);
+  text(roster[randomIndex].firstName + " " + roster[randomIndex].lastName, windowWidth/2, windowHeight/2);
   fill(random(0, 255), random(0, 255), random(0, 255));
-  stroke(random(0, 255), random(0, 255), random(0, 255));
-  text("\nFavorite " + thisThing + ":", 50, 50);
+   stroke(0);
+  textSize(70);
+  text("\nFavorite " + thisThing + ":", windowWidth/2, windowHeight/1.8);
   fill(random(0, 255), random(0, 255), random(0, 255));
-  stroke(random(0, 255), random(0, 255), random(0, 255));
-  textSize(20);
-  text(random([roster[randomIndex][thisThing]]), 50, 120);
+  // stroke(random(0, 255), random(0, 255), random(0, 255));
+  textSize(70);
+  text(random([roster[randomIndex][thisThing]]), windowWidth/2, windowHeight/1.4);
   roster.splice(randomIndex, 1);
   }
   else{
     background(random(200, 255));
-    text("Nothing left!", 50, 50);
+    text("Nothing left!", windowWidth/2, windowHeight/2);
   }
 }
 
