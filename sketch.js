@@ -4,8 +4,11 @@ let animating = false;
 let num = 0;
 let beginning = true;
 let sizze = 50;
-let button;
+let startRandomizerButton;
+let addMoreButton;
 let cnv;
+let nameInputs = [];
+let firstTime = true;
 
 function setup() {
   //createCanvas(400, 400);
@@ -17,9 +20,18 @@ function setup() {
   //text("Click to randomize", windowWidth/2, windowHeight/2);
 
   //button = createButton("Click To Randomize!");
-  button = select("#randButton");
-  button.mousePressed(buttonPressed);
-  button.class("randomizerButton");
+  startRandomizerButton = select("#randButton");
+  startRandomizerButton.mousePressed(buttonPressed);
+//  button.class("randomizerButton");
+
+  addMoreButton = select("#addMoreButton");
+  addMoreButton.mousePressed(addAnotherInput);
+
+
+  for(let i = 0; i < 3; i++) {
+    nameInputs.push(createInput());
+    nameInputs[nameInputs.length - 1].parent("#inputFields");
+  }
 }
 
 function draw() {
@@ -33,7 +45,10 @@ function draw() {
 
     }
 
-
+function addAnotherInput() {
+    nameInputs.push(createInput());
+    nameInputs[nameInputs.length - 1].parent("#inputFields");
+}
 
 function randomizer(){
   animating = false;
@@ -45,6 +60,12 @@ function randomizer(){
   //background(random(200, 255));
   background(random(0, 255), random(0, 255), random(0, 255));
   randomIndex = int(random(roster.length));
+  fill(random(0, 255), random(0, 255), random(0, 255));
+  stroke(0);
+  textSize(70);
+  text(roster[randomIndex], width / 2, height / 2);
+  roster.splice(randomIndex, 1);
+  /*
   let thisThing = random(favoriteThing);
   text(roster[randomIndex].firstName + " " + roster[randomIndex].lastName, windowWidth/2, windowHeight/2);
   fill(random(0, 255), random(0, 255), random(0, 255));
@@ -56,6 +77,7 @@ function randomizer(){
   textSize(70);
   text(random([roster[randomIndex][thisThing]]), windowWidth/2, windowHeight/1.4);
   roster.splice(randomIndex, 1);
+  */
   }
   else{
     background(random(200, 255));
@@ -63,12 +85,25 @@ function randomizer(){
   }
 }
 
-function buttonPressed (){
+function buttonPressed() {
+
+  if(firstTime) {
+    for (let i = 0; i < nameInputs.length; i++) {
+      roster.push(nameInputs[i].value());
+    }
+    firstTime = false;
+  }
+
   animating = true;
   setTimeout(randomizer, 2000);
 
 }
 
+var roster = [{
+
+}]
+
+/*
 var roster = [{
     firstName: "Zainib",
     lastName: "Ahmed",
@@ -427,3 +462,4 @@ var roster = [{
 
 
 ]
+*/
