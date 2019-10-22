@@ -4,14 +4,22 @@ let animating = false;
 let num = 0;
 let beginning = true;
 let sizze = 50;
+let button;
+let cnv;
 
 function setup() {
-  createCanvas(400, 400);
-  createCanvas(windowWidth, windowHeight);
+  //createCanvas(400, 400);
+  cnv = createCanvas(windowWidth, windowHeight);
+  cnv.parent("#canvasDiv");
   textSize(100);
   textFont('Georgia');
   textAlign(CENTER, CENTER);
-  text("Click to randomize", windowWidth/2, windowHeight/2);
+  //text("Click to randomize", windowWidth/2, windowHeight/2);
+
+  //button = createButton("Click To Randomize!");
+  button = select("#randButton");
+  button.mousePressed(buttonPressed);
+  button.class("randomizerButton");
 }
 
 function draw() {
@@ -55,7 +63,7 @@ function randomizer(){
   }
 }
 
-function mousePressed (){
+function buttonPressed (){
   animating = true;
   setTimeout(randomizer, 2000);
 
